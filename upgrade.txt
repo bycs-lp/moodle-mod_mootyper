@@ -84,13 +84,7 @@ GitHub # | GitHub issue title | MooTyper ticket | Upgrade status | Notes
     2026032123 Verified code present: Czech(V5).php/.js files exist; full character-coverage
         validation is still a manual typing check.
 20200812 MooTyper_590 - mootyper_scale_used and mootyper_scale_used_anywhere not implemented correctly.
-20210318 MooTyper_684 - Need Telugu(TEV5) keyboard layout.
-    2026032120 Verified not fixed: no Telugu(TEV5) layout files are present;
-        current repo contains Telugu(V4).php/.js only.
-    2026100101 Fixed Telugu(TEV5).php top row rendering slightly too tall: the jkeyequals
-        keytop (ఋ/ౄ/ృ) used font-size 14px; reduced to 10px so the row height matches.
-        Verified with admin, teacher, and two student accounts.
-        Files: layouts/Telugu(TEV5).php.
+
 20210318 MooTyper_685 - Need Thai(THV5) keyboard layout.
 20210318 MooTyper_688 - Need Uyghur(UG_LTV5) keyboard layout.
     2026032121 Verified not fixed: no Uyghur(UG_LTV5) layout files are present;
@@ -171,20 +165,30 @@ GitHub # | GitHub issue title | MooTyper ticket | Upgrade status | Notes
 
 Moodle Versions
 ===============
+=== 5.3.0 === pending
+
+
 === 5.2.0 === (Build: 2026100300)
-20221207 MooTyper_974bt - Direct access to eedit.php is checked and prevented when the
+20210318 MooTyper_684r - Need Telugu(TEV5) keyboard layout.
+    2026032120 Verified not fixed: no Telugu(TEV5) layout files are present;
+        current repo contains Telugu(V4).php/.js only.
+    2026100101 Fixed Telugu(TEV5).php top row rendering slightly too tall: the jkeyequals
+        keytop (ఋ/ౄ/ృ) used font-size 14px; reduced to 10px so the row height matches.
+        Verified with admin, teacher, and two student accounts.
+        Files: layouts/Telugu(TEV5).php.
+20221207 MooTyper_974r - Direct access to eedit.php is checked and prevented when the
     requested exercise's lesson is not editable by the current user.
     2026093001 Verified CM login, aftersetup capability, lesson edit policy, and sesskey save
         checks in eedit.php; this coverage is retained alongside the later editor hardening.
         Files: eedit.php.
-20260829 MooTyper_1537bt - Undefined array key and trim null warnings in db/install.php and lsnimport.php.
+20260829 MooTyper_1537r - Undefined array key and trim null warnings in db/install.php and lsnimport.php.
     2026082901 db/install.php: Added safety checks to guard against missing array keys and skip empty
     trailing /**/ splits when parsing lesson files. lsnimport.php: Applied the same checks in both import loops.
-20260902 MooTyper_1543bt - Feature Request - Need to implement modulename_summary language string.
+20260902 MooTyper_1543r - Feature Request - Need to implement modulename_summary language string.
     2026090301 Added the three needed new strings.
-20260903 MooTyper_1548bt - FEATURE_MOD_PURPOSE is incorrectly set to COLLABORATION should be ASSESSMENT.
+20260903 MooTyper_1548r - FEATURE_MOD_PURPOSE is incorrectly set to COLLABORATION should be ASSESSMENT.
     2026090301 Changed the code in lib.php/62 to become MOD_PURPOSE_ASSESSMENT.
-20260926 MooTyper_1552bt - Feature Request - Develop Azerbaijan Cyrillic and Latin KB Layouts.
+20260926 MooTyper_1552r - Feature Request - Develop Azerbaijan Cyrillic and Latin KB Layouts.
     2026092501 Gemini says most used type of KB layout is Azerbaijani Latin so developing it first.
         Created the two files, AzerbaijaniLatin(AZEV5).php and AzerbaijaniLatin(AZEV5).js base off
         the French(FRV5) files. Got the layout looking correct in the .php file now working on key
@@ -194,39 +198,7 @@ Moodle Versions
     2026092601 Created two files for the Cyrillic layout. Both versions appear to work correctly.
         Files: AzerbaijaniLatin(AZEV5).php, AzerbaijaniLatin(AZEV5).js, AzerbaijaniCyrillic(AZCV5).js,
             AzerbaijaniCyrillic(AZCV5).php
-20260929 MooTyper_1563bt - #332 Command-line tools shipped inside the web root declare CLI_SCRIPT
-    and include a caller-supplied config.php.
-    2026093001 Added an early CLI-only guard and changed all four tools to load the fixed
-        Moodle config.php path relative to their source files; removed --moodleroot bootstrap input.
-        Files: tools/mootyper_XX_course_populate.php, tools/mootyper_cleanup_announcements_forum.php,
-            tools/icontent_intro/deploy_icontent_intro.php,
-            tools/icontent_intro/apply_general_section_baseline.php.
-20260929 MooTyper_1564bt - #333 Lesson deletion unlinks a path built from an unsanitised, author-
-    controlled lesson name.
-    2026093001 Require a plain lesson filename and verify the resolved deletion path remains
-        inside the plugin lessons directory before unlinking it.
-        Files: lsnexrem.php.
-20260929 MooTyper_1565bt - #334 Lesson enrolment helper ignores the course it is asked about, so it
-    authorises every lesson.
-    2026093001 Scope enrollment checks to the requested course and active enrolment time window.
-        Files: classes/local/lessons.php.
-20260929 MooTyper_1566bt - #335 Lesson export lets any enrolled user download the full text of any
-    lesson, including exam content.
-    2026093001 Require the resolved MooTyper activity and aftersetup capability for exports;
-        bind export callers and lesson queries to the activity context.
-        Files: lsnexport.php, exercises.php.
-20260929 MooTyper_1567bt - #336 Privacy provider erasure targets a non-existent column and deletes
-    grades outside the approved context.
-    2026093001 Scope approved user erasure to the activity context and delete matching grades and
-        attempts using their valid activity columns.
-        Files: classes/privacy/provider.php.
-20260929 MooTyper_1568bt - #337 Activity colour settings are emitted unescaped into a stylesheet
-    and into form attributes.
-    2026093001 Sanitize stored colours before CSS interpolation and HTML-escape colour form values
-        across activity pages and the settings form.
-        Files: lib.php, view.php, eedit.php, eins.php, exercises.php, gview.php, layouts.php,
-            owngrades.php, mod_setup.php.
-20260929 MooTyper_1553bt - #322 Grade submission endpoint accepts client-supplied
+20260929 MooTyper_1553r - #322 Grade submission endpoint accepts client-supplied
     scores for any activity from any logged-in user.
     2026093001 Grade and attempt endpoints now require activity access and sesskey validation,
         scope attempts to the current user and activity, validate exercise membership, reject
@@ -236,30 +208,30 @@ Moodle Versions
             js/typer(ETV7).js, js/typer(KRV7).js, js/typer(JPV7).js.
     2026093002 End-of-exercise duration now ends at the server-timestamped final sample,
         excluding time paused before the student clicks Continue.
-20260929 MooTyper_1554bt - #323 Activity settings page authorises against one activity and
+20260929 MooTyper_1554r - #323 Activity settings page authorises against one activity and
     writes to another.
     2026093001 Bind settings updates to the resolved activity instance, ignore conflicting
         request IDs, and require sesskey validation on Confirm.
         Files: mod_setup.php.
-20260929 MooTyper_1555bt - #324 Attempt-tracking endpoint lets any logged-in user create and
+20260929 MooTyper_1555r - #324 Attempt-tracking endpoint lets any logged-in user create and
     mutate other users' attempt records.
     2026093001 Scope attempt creation to the authorized activity and current user; require a
         sesskey and verify ownership, activity, and in-progress state before recording or
         finalizing attempts.
         Files: atchk.php, js/typer.js, js/typer(ETV7).js,
             js/typer(KRV7).js, js/typer(JPV7).js.
-20260929 MooTyper_1556bt - #325 Backup restore stores an unvalidated keyboard-layout name
+20260929 MooTyper_1556r - #325 Backup restore stores an unvalidated keyboard-layout name
     that is later used to build filesystem paths.
     2026093001 Reject unsafe layout names during restore and validate stored names before
         keyboard file paths are built or layout files are deleted.
         Files: backup/moodle2/restore_mootyper_stepslib.php, classes/local/keyboards.php,
             klrem.php.
-20260929 MooTyper_1557bt - #326 CSV grade export releases every student's name and results
+20260929 MooTyper_1557r - #326 CSV grade export releases every student's name and results
     for any activity to any logged-in user.
     2026093001 Require grade-view capability for the resolved activity and restrict exported
         rows to the current group; build export metadata from the resolved activity records.
         Files: csvexport.php.
-20260929 MooTyper_1558bt - #327 Exercise and lesson text is written into the typing page
+20260929 MooTyper_1558r - #327 Exercise and lesson text is written into the typing page
     without escaping, allowing script injection across courses.
     2026093001 Encode typing/display strings as JSON-safe JavaScript literals and escape stored
         lesson/exercise content in typing, editing, and exercise-list HTML output.
@@ -268,32 +240,64 @@ Moodle Versions
         instead of the Enter-key down arrow. Stored texttotype uses JS-style escapes (\n, \\),
         so view.php now decodes \n, \r, \\, \" and \' to real characters before json_encode().
         Files: view.php.
-20260929 MooTyper_1559bt - #328 Exercise editor accepts any exercise id site-wide and renames
+20260929 MooTyper_1559r - #328 Exercise editor accepts any exercise id site-wide and renames
     the shared lesson.
     2026093001 Authorize the resolved exercise through its lesson's edit policy and require
         sesskey validation on saves.
         Files: eedit.php.
-20260929 MooTyper_1560bt - #329 Grade deletion ownership check is gated on an attacker-controlled
+20260929 MooTyper_1560r - #329 Grade deletion ownership check is gated on an attacker-controlled
     request parameter.
     2026093001 Require sesskey and grade-view capabilities; enforce grade ownership for users
         without manage-grades capability regardless of the requested return mode.
         Files: attrem.php, gview.php, owngrades.php,
             tests/behat/behat_mod_mootyper.php, tests/behat/remove_grade.feature.
-20260929 MooTyper_1561bt - #330 Keyboard-layout deletion has no capability check and removes files
+20260929 MooTyper_1561r - #330 Keyboard-layout deletion has no capability check and removes files
     from the plugin directory.
     2026093001 Restrict layout management and deletion to site configurators, require sesskey,
         and safely encode layout names in deletion links while retaining path validation.
         Files: layouts.php, klrem.php.
-20260929 MooTyper_1562bt - #331 Lesson and exercise deletion has no capability check, letting any
+20260929 MooTyper_1562r - #331 Lesson and exercise deletion has no capability check, letting any
     enrolled user destroy shared content and everyone's grades.
     2026093001 Require aftersetup capability and sesskey, bind targets to the activity's lesson,
         and reject cross-activity lesson/exercise deletion requests.
         Files: lsnexrem.php, exercises.php.
-20260929 MooTyper_1569bt - Errors are no longer being registered in MooTyper Issue#134.
+20260929 MooTyper_1563r - #332 Command-line tools shipped inside the web root declare CLI_SCRIPT
+    and include a caller-supplied config.php.
+    2026093001 Added an early CLI-only guard and changed all four tools to load the fixed
+        Moodle config.php path relative to their source files; removed --moodleroot bootstrap input.
+        Files: tools/mootyper_XX_course_populate.php, tools/mootyper_cleanup_announcements_forum.php,
+            tools/icontent_intro/deploy_icontent_intro.php,
+            tools/icontent_intro/apply_general_section_baseline.php.
+20260929 MooTyper_1564r - #333 Lesson deletion unlinks a path built from an unsanitised, author-
+    controlled lesson name.
+    2026093001 Require a plain lesson filename and verify the resolved deletion path remains
+        inside the plugin lessons directory before unlinking it.
+        Files: lsnexrem.php.
+20260929 MooTyper_1565r - #334 Lesson enrolment helper ignores the course it is asked about, so it
+    authorises every lesson.
+    2026093001 Scope enrollment checks to the requested course and active enrolment time window.
+        Files: classes/local/lessons.php.
+20260929 MooTyper_1566r - #335 Lesson export lets any enrolled user download the full text of any
+    lesson, including exam content.
+    2026093001 Require the resolved MooTyper activity and aftersetup capability for exports;
+        bind export callers and lesson queries to the activity context.
+        Files: lsnexport.php, exercises.php.
+20260929 MooTyper_1567r - #336 Privacy provider erasure targets a non-existent column and deletes
+    grades outside the approved context.
+    2026093001 Scope approved user erasure to the activity context and delete matching grades and
+        attempts using their valid activity columns.
+        Files: classes/privacy/provider.php.
+20260929 MooTyper_1568r - #337 Activity colour settings are emitted unescaped into a stylesheet
+    and into form attributes.
+    2026093001 Sanitize stored colours before CSS interpolation and HTML-escape colour form values
+        across activity pages and the settings form.
+        Files: lib.php, view.php, eedit.php, eins.php, exercises.php, gview.php, layouts.php,
+            owngrades.php, mod_setup.php.
+20260929 MooTyper_1569r - Errors are no longer being registered in MooTyper Issue#134.
     2026092901 Fixed immediate error counting and color feedback across the shared,
         Amharic, and Korean typing engines, including Amharic sequence composition.
         Files: js/typer.js, js/typer(ETV7).js, js/typer(KRV7).js.
-20261001 MooTyper_1570 - Can't find record in database when trying to delete exercise results.
+20261001 MooTyper_1570r - Can't find record in database when trying to delete exercise results.
     2026100101 Delete links built c_id/m_id from raw id/n request params, so pages opened
         without id sent c_id=0 to attrem.php (dml_missing_record_exception). Links now use the
         resolved $cm->id and $mootyper->id.
@@ -305,12 +309,17 @@ Moodle Versions
 
 
 === 5.1.3 === (Build: 2026082501)
-20200607 MooTyper_495 - Need to verify backup as it appears to be broken.
+20200607 MooTyper_495r - Need to verify backup as it appears to be broken.
     2026082503 Verified fixed: current backup/restore code correctly preserves
         dictation exercises and media on Sharing Cart copy and course restore,
         including the Record RTC audio/video prompt files used by dictation.
         This verification was completed via MooTyper_1532 testing.
-20260825 MooTyper_1532 - Backup and restore of dictation exercises using Record RTC fail to work.
+20260731 MooTyper_1523r - Feature Request - Make the lsnimport.php file UI more user friendly.
+    2026082504 Marketplace phplint failure fix: the MooTyper_1523 accented-to-ASCII
+        Spanish layout filename rename had copied instead of moved the files, leaving
+        both variants in layouts/; deleted the four leftover accented duplicates so
+        only the ASCII Espanol* files remain.
+20260825 MooTyper_1532r - Backup and restore of dictation exercises using Record RTC fail to work.
     2026082501 Installed Sharing Cart and on moodledemo copied the activity,
     https://drachels.net/moodledemo/mod/mootyper/view.php?id=10765 from it's location to a new one
     at, https://drachels.net/moodledemo/mod/mootyper/view.php?id=10765, and got the same results.
@@ -320,14 +329,10 @@ Moodle Versions
         annotating per-exercise dictation files in backup, and restoring them
         with the proper exercise file mapping so restored activities keep
         working audio/video prompts. This fix also verifies MooTyper_495.
-20260731 MooTyper_1523 - Feature Request - Make the lsnimport.php file UI more user friendly.
-    2026082504 Marketplace phplint failure fix: the MooTyper_1523 accented-to-ASCII
-        Spanish layout filename rename had copied instead of moved the files, leaving
-        both variants in layouts/; deleted the four leftover accented duplicates so
-        only the ASCII Espanol* files remain.
+
 
 === 5.1.2 === (Build: 2026080500)
-20200521 MooTyper_437bt - Request for new Audio Exercise Mode.
+20200521 MooTyper_437r - Request for new Audio Exercise Mode.
     2026072601 Added dictationdata/dictationdataformat fields, allowed teachers to record or embed
         audio/video in eedit.php, show player previews in exercises.php, and display the
         dictation player in view.php with dynamic context handling and hidden text until typed.
@@ -342,32 +347,32 @@ Moodle Versions
         and cleaning affected existing exercises that were stored with HTML markup.
     2026072804 Added automatic short retry for failed first-load dictation video sources in
         exercises.php and view.php so delayed PoodLL conversions no longer require manual page reload.
-20200521 MooTyper_445bt - Need to change all refs to audio over to dictation.
+20200521 MooTyper_445r - Need to change all refs to audio over to dictation.
     2026073007 Current 5.1.1 dictation work now supports audio, video, and TTS prompts.
-20200521 MooTyper_446bt - User ownership stops dictation from working.
+20200521 MooTyper_446r - User ownership stops dictation from working.
     2026073008 Current 5.1.1 dictation handling works across saved prompt ownership paths.
-20200521 MooTyper_448bt - exercises.php needs mods for audio.
+20200521 MooTyper_448r - exercises.php needs mods for audio.
     2026073009 exercises.php now renders working dictation audio, video, and TTS prompts.
-20200521 MooTyper_449bt - eedit.php needs mods for audio.
+20200521 MooTyper_449r - eedit.php needs mods for audio.
     2026073010 eedit.php now stores and edits working dictation audio, video, and TTS prompts.
-20200521 MooTyper_455bt - view.php needs mods for audio.
+20200521 MooTyper_455r - view.php needs mods for audio.
     2026073012 view.php now displays working dictation audio, video, and TTS prompts.
-20200521 MooTyper_456bt - need to modify database tables for MooTyper audio capability.
+20200521 MooTyper_456r - need to modify database tables for MooTyper audio capability.
     2026073011 Dictation storage fields now support the restored audio/video prompt workflow.
-20200612 MooTyper_537bt - discovered dictation stuff in current code that needs to be eliminated.
+20200612 MooTyper_537r - discovered dictation stuff in current code that needs to be eliminated.
     2026073013 Reworked old dictation fragments into the current working dictation flow.
-20210325 MooTyper_690bt - Need work on the documentation on Moodle.
+20210325 MooTyper_690r - Need work on the documentation on Moodle.
     2026073003 Split the MooTyper docs roadmap into dedicated keyboard, dictation,
         and media examples pages.
     2026073004 Copied the updated MooTyper docs pages to the moodledemo Audio/Video
         Dictation Lessons course.
-20260415  MooTyper_1472bt - Investigate adding a Welsh keyboard layout.
+20260415  MooTyper_1472r - Investigate adding a Welsh keyboard layout.
     2026072101 Created the two basic files based off the English(UKV5) files.
     2026072201 Did code tuneup and I am able to complete Lesson CY_Wesh1.txt.
-20260514 MooTyper_1482bt - Remove deprecated FEATURE_GROUPMEMBERSONLY support.
+20260514 MooTyper_1482r - Remove deprecated FEATURE_GROUPMEMBERSONLY support.
     2026073005 Removed FEATURE_GROUPMEMBERSONLY handling from mootyper_supports()
         while keeping FEATURE_GROUPS and FEATURE_GROUPINGS behavior unchanged.
-20260729 MooTyper_1521bt - Feature Request - Would be nice to implement a Japanese keyboard layout.
+20260729 MooTyper_1521r - Feature Request - Would be nice to implement a Japanese keyboard layout.
     2026072901 Added Japanese(JPV7) V1 typing scaffold: new layout files
         (layouts/Japanese(JPV7).php/.js), standalone IME-aware typer(JPV7).js,
         and view.php routing to load the dedicated typer for Japanese layout.
@@ -448,7 +453,7 @@ Moodle Versions
         exercise saves now preserve ruby/rt/rp tags in texttotype instead of
         flattening them to plain text, so Ruby-hint lessons keep their markup
         for later display/scoring.
-20260730 MooTyper_1522bt - Feature Request - Add filter capability to the audio/video
+20260730 MooTyper_1522r - Feature Request - Add filter capability to the audio/video
     field in mootyper_exercises.
     2026073001 Enabled Moodle filter rendering for dictationdata in exercises.php
         and view.php after pluginfile URL rewrite, so supported tags (including
@@ -463,7 +468,7 @@ Moodle Versions
         editor wrapper tags, preserving plain-text <> character sequences for typing.
     2026072907 Clarified eedit.php dictation media label/help text so it explicitly
         states this field is only for Dictation-mode audio/video typing prompts.
-20260731 MooTyper_1523 - Feature Request - Make the lsnimport.php file UI more user friendly.
+20260731 MooTyper_1523r - Feature Request - Make the lsnimport.php file UI more user friendly.
     2026073101 Modified the page render to give the option to see the page the old, full listing,
     way or with a much more user friendly version that only list new items and reports totals
     for items already in the database.
@@ -473,6 +478,9 @@ Moodle Versions
         Espanol* filenames, and added runtime alias mapping in
         classes/local/keyboards.php so existing DB layout names with accents
         still resolve to the correct files.
+20260806 MooTyper_1525r - Feature Request - Would be nice to have a Dvorak with keypad KB Layout.
+    2026080601 Used the Dvorak(V5) and EnglishWKeyPad(USV6) for guidance.
+    2026080602 Now have working version 6.2 with left alignment of characters on the keytops.
 
 === 5.1.0 === (Build: 20260428)
 20200521 MooTyper_435r - Need to be able to delete un-need lesson files from lesson folder.
@@ -774,20 +782,20 @@ Moodle Versions
         successful grade deletion so users return to the grades table position.
 
 === 4.3.0 === (Build: 2024102000)
-20240227 MooTyper_1215bt - Duplicate or Restore activity always winds up in Exam mode. Found
+20240227 MooTyper_1215r - Duplicate or Restore activity always winds up in Exam mode. Found
     code error with comparison in restore_mootyper_stepslib.php file. See ticket for details.
-20240516 MooTyper_1240bt - Need Español Lantin America V5 and V6 keyboard layouts. Created and
+20240516 MooTyper_1240r - Need Español Lantin America V5 and V6 keyboard layouts. Created and
     verfied the code as needed in the four files.
-20240517 MooTyper_1242bt - Need new KB layout, EnglishInternationalWKeypad(INTLV6). Made changes
+20240517 MooTyper_1242r - Need new KB layout, EnglishInternationalWKeypad(INTLV6). Made changes
     as needed to create the working layout.
-20240706 MooTyper_1259bt - Need to change all occurences of, // @codingStandardsIgnoreLine, over
+20240706 MooTyper_1259r - Need to change all occurences of, // @codingStandardsIgnoreLine, over
     to, // phpcs:ignore. Changed
-20240902 MooTyper_1312bt - MooTyper - High delay in large courses #125. Added missing $record->userid
+20240902 MooTyper_1312r - MooTyper - High delay in large courses #125. Added missing $record->userid
     and now seems to work correctly.
-20240902 MooTyper_1313bt - MooTyper - number_format(): Passing null to parameter #1 ($num) of
+20240902 MooTyper_1313r - MooTyper - number_format(): Passing null to parameter #1 ($num) of
     type float is deprecated. Found suggestion to switch from using, number_format();, over
     to using, sprintf();, instead. See ticker for details of actual code change.
-20240918 MooTyper_1320bt - Need a Maori Keyboard Layout. Created the two files based off the one's
+20240918 MooTyper_1320r - Need a Maori Keyboard Layout. Created the two files based off the one's
     for English(USV5) EnglishWKeypad(USV6).
 
 
